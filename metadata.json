@@ -1,0 +1,6 @@
+{
+  "name": "OS Master - Sistema de Ordem de Serviço SaaS",
+  "description": "Sistema moderno e completo para gestão de Ordens de Serviço (OS), Clientes, Técnicos, Orçamentos e Kanban com Node.js, Express, Prisma e React.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,200 @@
+{
+  "entities": {
+    "Cliente": {
+      "title": "Cliente",
+      "description": "Cadastro de cliente pessoa física ou jurídica",
+      "type": "object",
+      "properties": {
+        "nome": { "type": "string" },
+        "email": { "type": "string" },
+        "telefone": { "type": "string" },
+        "cpfCnpj": { "type": "string" },
+        "endereco": { "type": "string" },
+        "cidade": { "type": "string" },
+        "estado": { "type": "string" },
+        "cep": { "type": "string" },
+        "observacoes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["nome", "telefone"]
+    },
+    "Tecnico": {
+      "title": "Tecnico",
+      "description": "Técnico ou mecânico responsável pelas manutenções",
+      "type": "object",
+      "properties": {
+        "nome": { "type": "string" },
+        "email": { "type": "string" },
+        "telefone": { "type": "string" },
+        "especialidade": { "type": "string" },
+        "comissaoPercent": { "type": "number" },
+        "status": { "type": "string", "enum": ["ativo", "inativo"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["nome"]
+    },
+    "Servico": {
+      "title": "Servico",
+      "description": "Serviço prestado pela assistência técnica",
+      "type": "object",
+      "properties": {
+        "nome": { "type": "string" },
+        "descricao": { "type": "string" },
+        "preco": { "type": "number" },
+        "tempoEstimadoMinutos": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["nome", "preco"]
+    },
+    "Produto": {
+      "title": "Produto",
+      "description": "Produto ou peça em estoque",
+      "type": "object",
+      "properties": {
+        "codigo": { "type": "string" },
+        "nome": { "type": "string" },
+        "categoria": { "type": "string" },
+        "precoCusto": { "type": "number" },
+        "precoVenda": { "type": "number" },
+        "estoqueAtual": { "type": "number" },
+        "estoqueMinimo": { "type": "number" },
+        "unidade": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["nome", "precoVenda"]
+    },
+    "OrdemServico": {
+      "title": "OrdemServico",
+      "description": "Ordem de serviço de manutenção ou conserto",
+      "type": "object",
+      "properties": {
+        "numero": { "type": "number" },
+        "clienteId": { "type": "string" },
+        "clienteNome": { "type": "string" },
+        "clienteTelefone": { "type": "string" },
+        "tecnicoId": { "type": "string" },
+        "tecnicoNome": { "type": "string" },
+        "equipamento": { "type": "string" },
+        "marca": { "type": "string" },
+        "modelo": { "type": "string" },
+        "numeroSerie": { "type": "string" },
+        "defeitoRelatado": { "type": "string" },
+        "diagnosticoTecnico": { "type": "string" },
+        "solucao": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["aberta", "em_analise", "orcamento_pendente", "aprovada", "em_andamento", "aguardando_pecas", "concluido", "entregue", "cancelada"]
+        },
+        "prioridade": {
+          "type": "string",
+          "enum": ["baixa", "normal", "alta", "urgente"]
+        },
+        "dataAbertura": { "type": "string" },
+        "previsaoEntrega": { "type": "string" },
+        "dataConclusao": { "type": "string" },
+        "valorServicos": { "type": "number" },
+        "valorPecas": { "type": "number" },
+        "valorDesconto": { "type": "number" },
+        "valorTotal": { "type": "number" },
+        "formaPagamento": { "type": "string" },
+        "observacoes": { "type": "string" },
+        "itensPecas": { "type": "array" },
+        "itensServicos": { "type": "array" },
+        "historico": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["clienteNome", "equipamento", "status"]
+    },
+    "Venda": {
+      "title": "Venda",
+      "description": "Venda direta de balcão de produtos",
+      "type": "object",
+      "properties": {
+        "numero": { "type": "number" },
+        "clienteId": { "type": "string" },
+        "clienteNome": { "type": "string" },
+        "dataVenda": { "type": "string" },
+        "itens": { "type": "array" },
+        "valorSubtotal": { "type": "number" },
+        "valorDesconto": { "type": "number" },
+        "valorTotal": { "type": "number" },
+        "formaPagamento": { "type": "string" },
+        "status": { "type": "string", "enum": ["finalizada", "cancelada"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["clienteNome", "valorTotal"]
+    },
+    "LancamentoFinanceiro": {
+      "title": "LancamentoFinanceiro",
+      "description": "Fluxo de caixa, receitas e despesas",
+      "type": "object",
+      "properties": {
+        "tipo": { "type": "string", "enum": ["receita", "despesa"] },
+        "categoria": { "type": "string" },
+        "descricao": { "type": "string" },
+        "valor": { "type": "number" },
+        "dataVencimento": { "type": "string" },
+        "dataPagamento": { "type": "string" },
+        "status": { "type": "string", "enum": ["pendente", "pago", "atrasado"] },
+        "referenciaTipo": { "type": "string", "enum": ["os", "venda", "avulso"] },
+        "referenciaId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["tipo", "descricao", "valor"]
+    },
+    "ConfiguracaoEmpresa": {
+      "title": "ConfiguracaoEmpresa",
+      "description": "Configurações gerais e dados da assistência",
+      "type": "object",
+      "properties": {
+        "nomeFantasia": { "type": "string" },
+        "razaoSocial": { "type": "string" },
+        "cnpj": { "type": "string" },
+        "telefone": { "type": "string" },
+        "email": { "type": "string" },
+        "endereco": { "type": "string" },
+        "cidade": { "type": "string" },
+        "estado": { "type": "string" },
+        "cep": { "type": "string" },
+        "mensagemTermosOS": { "type": "string" },
+        "diasGarantiaPadrao": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/clientes/{clienteId}": {
+      "schema": "Cliente",
+      "description": "Clientes da assistência técnica"
+    },
+    "/tecnicos/{tecnicoId}": {
+      "schema": "Tecnico",
+      "description": "Técnicos e profissionais cadastrados"
+    },
+    "/servicos/{servicoId}": {
+      "schema": "Servico",
+      "description": "Serviços prestados"
+    },
+    "/produtos/{produtoId}": {
+      "schema": "Produto",
+      "description": "Produtos e peças em estoque"
+    },
+    "/ordens_servico/{osId}": {
+      "schema": "OrdemServico",
+      "description": "Ordens de serviço e manutenções"
+    },
+    "/vendas/{vendaId}": {
+      "schema": "Venda",
+      "description": "Vendas registradas"
+    },
+    "/lancamentos_financeiros/{lancamentoId}": {
+      "schema": "LancamentoFinanceiro",
+      "description": "Lançamentos financeiros de receitas e despesas"
+    },
+    "/configuracao_empresa/{configId}": {
+      "schema": "ConfiguracaoEmpresa",
+      "description": "Configurações da empresa"
+    }
+  }
+}
